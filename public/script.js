@@ -1,5 +1,8 @@
 const container = document.querySelector("#container");
 
+//Calling functions
+fetchData();
+
 async function fetchData() {
   const response = await fetch("/api/movies");
   const data = await response.json();
@@ -30,5 +33,3 @@ async function fetchData() {
   
   `;
 }
-
-fetchData();
