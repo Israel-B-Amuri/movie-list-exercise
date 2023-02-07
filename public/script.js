@@ -4,7 +4,7 @@ const filterByYearButton = document.querySelector("#byYear");
 //Calling functions
 fetchData();
 
-async function fetchData(array) {
+async function fetchData() {
   const response = await fetch("/api/movies");
   const data = await response.json();
   displayData(data);
