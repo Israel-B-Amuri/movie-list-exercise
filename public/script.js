@@ -1,12 +1,33 @@
 const container = document.querySelector("#container");
 const filterByYearButton = document.querySelector("#byYear");
+
 //Calling functions
 fetchData();
 
-async function fetchData() {
+async function fetchData(array) {
   const response = await fetch("/api/movies");
   const data = await response.json();
+  displayData(data);
+}
 
+//filter by year
+filterByYearButton.addEventListener("click", async () => {
+  const response = await fetch("/api/movies");
+  const data = await response.json();
+  const minimumYear = document.querySelector("#minimum");
+  const maximumYear = document.querySelector("#maximum");
+  const filteredMovies = data.filter(
+    (movie) =>
+      movie.releaseDate.split("-")[0] >= minimumYear.value &&
+      movie.releaseDate.split("-")[0] <= maximumYear.value
+  );
+
+  displayData(filteredMovies);
+});
+
+//Displaying data on document
+
+function displayData(array) {
   container.innerHTML = `
   <table style="width:80%">
     <tr>
@@ -17,7 +38,7 @@ async function fetchData() {
         <th>Rating</th>
     </tr>
    
-    ${data
+    ${array
       .map(
         (movie) =>
           `<tr>
@@ -33,18 +54,3 @@ async function fetchData() {
   </table>
   `;
 }
-
-filterByYearButton.addEventListener("click", async () => {
-  const response = await fetch("/api/movies");
-  const data = await response.json();
-  const movies = data.map((movie) => movie);
-  const minimumYear = document.querySelector("#minimum");
-  const maximumYear = document.querySelector("#maximum");
-  console.log(
-    movies.filter(
-      (movie) =>
-        movie.releaseDate.split("-")[0] >= minimumYear.value &&
-        movie.releaseDate.split("-")[0] <= maximumYear.value
-    )
-  );
-});
