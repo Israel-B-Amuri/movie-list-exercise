@@ -34,7 +34,11 @@ async function filterGenres() {
     const filteredMovies = moviesData.filter((movie) =>
       choice === "All"
         ? fetchData()
-        : choice === movie.genre[0]
+        : choice === movie.genre[0] ||
+          choice === movie.genre[1] ||
+          choice === movie.genre[2] ||
+          choice === movie.genre[3] ||
+          choice === movie.genre[4]
         ? movie
         : console.log("NOT FOUND")
     );
