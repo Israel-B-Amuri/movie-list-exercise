@@ -10,13 +10,18 @@
   <body>
     <div id="filter-container">
       <h2>Filter movies by:</h2>
-      <div>
-        <h3>By Year</h3>
-        <form action="/api/filter/year" method="post">
+      <div id="year">
+        <h3>Year</h3>
+        <form>
           <input type="text" id="minimum" placeholder="From e.g (1990)" />
           <input type="text" id="maximum" placeholder="To e.g (1998)" />
           <button type="button" id="byYear">Filter</button>
         </form>
+      </div>
+      <div id="genre">
+        <select name="genres" id="genres">
+          <option value="all">All</option>
+        </select>
       </div>
     </div>
     <div id="container"></div>

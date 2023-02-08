@@ -7,7 +7,39 @@ fetchData();
 async function fetchData() {
   const response = await fetch("/api/movies");
   const data = await response.json();
+
   displayData(data);
+  filterGenres();
+}
+
+async function filterGenres() {
+  const genreResponse = await fetch("/api/genres");
+  const genreData = await genreResponse.json();
+  const select = document.querySelector("select");
+  const moviesResponse = await fetch("/api/movies");
+  const moviesData = await moviesResponse.json();
+
+  select.innerHTML += `
+
+  ${genreData
+    .map(
+      (genre) => `
+   <option value="${genre}">${genre}</option>`
+    )
+    .join("")}
+`;
+
+  select.addEventListener("change", () => {
+    const choice = select.options[select.selectedIndex].value;
+    const filteredMovies = moviesData.filter((movie) =>
+      choice === "All"
+        ? fetchData()
+        : choice === movie.genre[0]
+        ? movie
+        : console.log("NOT FOUND")
+    );
+    displayData(filteredMovies);
+  });
 }
 
 //filter by year
@@ -42,11 +74,11 @@ function displayData(array) {
       .map(
         (movie) =>
           `<tr>
-        <td class="table-data">${movie.title}</td>
-        <td class="table-data">${movie.releaseDate.split("-")[0]}</td>
-        <td class="table-data">${movie.age}</td>
-        <td class="table-data">${movie.genre}</td>
-        <td class="table-data">${movie.rating * 100}%</td>
+            <td class="table-data">${movie.title}</td>
+            <td class="table-data">${movie.releaseDate.split("-")[0]}</td>
+            <td class="table-data">${movie.age}</td>
+            <td class="table-data">${movie.genre}</td>
+            <td class="table-data">${movie.rating * 100}%</td>
           </tr>`
       )
       .join("")}
