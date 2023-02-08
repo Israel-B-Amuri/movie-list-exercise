@@ -40,7 +40,7 @@ async function filterGenres() {
           choice === movie.genre[3] ||
           choice === movie.genre[4]
         ? movie
-        : console.log("NOT FOUND")
+        : null
     );
     displayData(filteredMovies);
   });
