@@ -8,17 +8,22 @@ filterGenres();
 async function fetchData() {
   const response = await fetch("/api/movies");
   const data = await response.json();
+  const ageRatingButton = document.querySelector("#ageRatingButton");
 
   displayData(data);
+  ageRatingButton.addEventListener("click", filterAgeRating);
 
   async function filterAgeRating() {
     const ageResponse = await fetch("/api/age-ratings");
     const ageData = await ageResponse.json();
-    const filteredMovies = data.filter((movie) => movie.age == "S");
+
+    const filteredMovies = data.filter(
+      (movie) => minimumAgeRating.value == movie.age //&&
+      //movie.age == maximumAgeRating.value
+    );
+
     console.log(filteredMovies);
   }
-
-  filterAgeRating();
 }
 
 async function filterGenres() {
@@ -73,7 +78,7 @@ filterByYearButton.addEventListener("click", async () => {
 
 function displayData(array) {
   container.innerHTML = `
-  <table style="width:80%">
+  <table ">
     <tr>
         <th>Title</th>
         <th>Year</th>
