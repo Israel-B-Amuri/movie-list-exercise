@@ -20,9 +20,16 @@ async function fetchData() {
       (movie) => movie.age === ageData[0] || movie.age === ageData[2]
     );
 
-    console.log(filtered);
+    //console.log(filtered);
   }
   filterAgeRating();
+
+  //filter by rating (To be continued)
+  function filterRating() {
+    const filtered = data.filter((movie) => movie.rating * 100 > 96);
+    console.log(filtered);
+  }
+  filterRating();
 }
 
 async function filterGenres() {
