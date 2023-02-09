@@ -1,3 +1,18 @@
 .table-data{
 text-align: center;
+
+}
+table{
+    min-width: 90%;
+    margin: 0 auto;
+}
+table td{
+    border: black  .2px solid;
+    padding: .8rem;
+}
+tr:nth-child(even){
+    background-color: #d8d8d8;
+}
+tr + tr{
+    cursor: pointer;
 }
