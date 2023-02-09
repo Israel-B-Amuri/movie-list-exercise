@@ -10,6 +10,15 @@ async function fetchData() {
   const data = await response.json();
 
   displayData(data);
+
+  async function filterAgeRating() {
+    const ageResponse = await fetch("/api/age-ratings");
+    const ageData = await ageResponse.json();
+    const filteredMovies = data.filter((movie) => movie.age == "S");
+    console.log(filteredMovies);
+  }
+
+  filterAgeRating();
 }
 
 async function filterGenres() {
