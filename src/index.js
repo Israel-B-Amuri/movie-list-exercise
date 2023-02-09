@@ -4,6 +4,7 @@ const { request } = require("http");
 const path = require("path");
 const movies = require("./data/movies.json");
 const genres = require("./data/genres.json");
+const ageRatings = require("./data/age-ratings.json");
 const port = process.env.PORT || 3000;
 
 const app = express();
@@ -25,6 +26,10 @@ app.get("/api/movies", (request, response) => {
 
 app.get("/api/genres", (request, response) => {
   response.status(200).send(genres);
+});
+
+app.get("/api/age-ratings", (request, response) => {
+  response.status(200).send(ageRatings);
 });
 
 app.listen(port, (error) => {

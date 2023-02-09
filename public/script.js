@@ -3,13 +3,13 @@ const filterByYearButton = document.querySelector("#byYear");
 
 //Calling functions
 fetchData();
+filterGenres();
 
 async function fetchData() {
   const response = await fetch("/api/movies");
   const data = await response.json();
 
   displayData(data);
-  filterGenres();
 }
 
 async function filterGenres() {
@@ -20,7 +20,6 @@ async function filterGenres() {
   const moviesData = await moviesResponse.json();
 
   select.innerHTML += `
-
   ${genreData
     .map(
       (genre) => `
