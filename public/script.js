@@ -16,14 +16,13 @@ async function fetchData() {
   async function filterAgeRating() {
     const ageResponse = await fetch("/api/age-ratings");
     const ageData = await ageResponse.json();
-
-    const filteredMovies = data.filter(
-      (movie) => minimumAgeRating.value == movie.age //&&
-      //movie.age == maximumAgeRating.value
+    const filtered = data.filter(
+      (movie) => movie.age === ageData[0] || movie.age === ageData[2]
     );
 
-    console.log(filteredMovies);
+    console.log(filtered);
   }
+  filterAgeRating();
 }
 
 async function filterGenres() {
