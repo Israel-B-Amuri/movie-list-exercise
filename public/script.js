@@ -1,36 +1,44 @@
 const container = document.querySelector("#container");
 const filterByYearButton = document.querySelector("#byYear");
-
+const ageRatingButton = document.querySelector("#ageRatingButton");
 //Calling functions
 fetchData();
 filterGenres();
 
+ageRatingButton.addEventListener("click", filterRating);
 async function fetchData() {
   const response = await fetch("/api/movies");
   const data = await response.json();
-  const ageRatingButton = document.querySelector("#ageRatingButton");
 
   displayData(data);
-  ageRatingButton.addEventListener("click", filterAgeRating);
 
   async function filterAgeRating() {
     const ageResponse = await fetch("/api/age-ratings");
     const ageData = await ageResponse.json();
     const filtered = data.filter(
-      (movie) => movie.age === ageData[0] || movie.age === ageData[2]
+      (movie) => movie.age === ageData[0] || movie.age === ageData[3]
     );
 
     //console.log(filtered);
   }
   filterAgeRating();
-
-  //filter by rating (To be continued)
-  function filterRating() {
-    const filtered = data.filter((movie) => movie.rating * 100 > 96);
-    console.log(filtered);
-  }
-  filterRating();
 }
+
+//filter by rating (To be continued)
+async function filterRating() {
+  const moviesResponse = await fetch("/api/movies");
+  const moviesData = await moviesResponse.json();
+  const minimumRating = document.querySelector("#minimum-rating");
+  const maximumRating = document.querySelector("#maximum-rating");
+  const filtered = moviesData.filter(
+    (movie) =>
+      movie.rating * 100 > minimumRating.value &&
+      movie.rating * 100 < maximumRating.value
+  );
+  displayData(filtered);
+}
+
+// filter by genres
 
 async function filterGenres() {
   const genreResponse = await fetch("/api/genres");
@@ -53,11 +61,11 @@ async function filterGenres() {
     const filteredMovies = moviesData.filter((movie) =>
       choice === "All"
         ? fetchData()
-        : choice === movie.genre[0] ||
-          choice === movie.genre[1] ||
-          choice === movie.genre[2] ||
-          choice === movie.genre[3] ||
-          choice === movie.genre[4]
+        : movie.genre[0] === choice ||
+          movie.genre[1] === choice ||
+          movie.genre[2] === choice ||
+          movie.genre[3] === choice ||
+          movie.genre[4] === choice
         ? movie
         : null
     );

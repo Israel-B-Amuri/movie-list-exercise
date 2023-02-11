@@ -8,6 +8,9 @@ body{
     line-height: 1;
     background-color: #f7f7f7;
 }
+#filter-container{
+    display: flex;
+}
 .table-data{
 text-align: center;
 
