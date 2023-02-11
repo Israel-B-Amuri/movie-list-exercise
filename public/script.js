@@ -104,7 +104,7 @@ function displayData(array) {
     ${array
       .map(
         (movie) =>
-          `<tr>
+          `<tr onclick="window.location='/movies/${movie.id}'">
             <td class="table-data">${movie.title}</td>
             <td class="table-data">${movie.releaseDate.split("-")[0]}</td>
             <td class="table-data">${movie.age}</td>

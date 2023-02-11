@@ -24,6 +24,23 @@ app.get("/api/movies", (request, response) => {
   );
 });
 
+//sending movie html file to movie route
+app.get("/movies/id:id", (request, response) => {
+  response.status(200).sendFile("public/movies-id.html");
+});
+
+//creating movie route
+
+app.get("/movies/:id", (request, response) => {
+  const movie = movies.find((movie) => movie.id == request.params.id);
+  if (!movie) {
+    return response
+      .status(200)
+      .json({ error: `movie with id ${request.params.id} not found` });
+  }
+  response.status(200).json(movie);
+});
+
 app.get("/api/genres", (request, response) => {
   response.status(200).send(genres);
 });
