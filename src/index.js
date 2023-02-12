@@ -25,13 +25,13 @@ app.get("/api/movies", (request, response) => {
 });
 
 //sending movie html file to movie route
-app.get("/movies/id:id", (request, response) => {
-  response.status(200).sendFile("public/movies-id.html");
+app.get("/movies/:id", (request, response) => {
+  response.status(200).sendFile(path.resolve("public/movies-id.html"));
 });
 
 //creating movie route
 
-app.get("/movies/:id", (request, response) => {
+app.get("/api/movies/:id", (request, response) => {
   const movie = movies.find((movie) => movie.id == request.params.id);
   if (!movie) {
     return response
