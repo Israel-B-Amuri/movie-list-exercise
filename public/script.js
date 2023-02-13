@@ -15,11 +15,11 @@ async function fetchData() {
   async function filterAgeRating() {
     const ageResponse = await fetch("/api/age-ratings");
     const ageData = await ageResponse.json();
-    const filtered = data.filter(
-      (movie) => movie.age === ageData[0] || movie.age === ageData[3]
-    );
+    const ageRating = ageData.map((age) => age.split("-").slice(-1));
+    console.log(ageRating[4]);
+    const filtered = data.filter((movie) => movie.age === "K-" + ageRating[3]);
 
-    //console.log(filtered);
+    console.log(filtered);
   }
   filterAgeRating();
 }

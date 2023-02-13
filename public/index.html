@@ -8,9 +8,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h2>Filter movies by:</h2>
     <div id="filter-container">
+      <p>Filter movies by:</p>
       <div id="year">
+        <h4>year</h4>
         <form>
           <input type="text" id="minimum" placeholder="From e.g (1990)" />
           <input type="text" id="maximum" placeholder="To e.g (1998)" />
@@ -18,15 +19,17 @@
         </form>
       </div>
       <div id="genre">
+        <h4>genre</h4>
         <select name="genres" id="genres">
           <option value="All">All</option>
         </select>
       </div>
-      <div id="age-rating">
+      <div id="rating">
+        <h4>rating</h4>
         <form>
           <input
             type="text"
-            placeholder="Minimum Age Rating e.g 80"
+            placeholder="minimum  Rating e.g 80"
             id="minimum-rating"
           />
           <input
